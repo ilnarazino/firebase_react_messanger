@@ -1,12 +1,12 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../routes';
-import { LOGIN_ROUTE } from '../utils/consts';
+
 
 
 
 const AppRouter = () => {
-    const user = true;
+    const user = false;
     return user ?
         (
             <Routes>
@@ -22,7 +22,7 @@ const AppRouter = () => {
                 {publicRoutes.map(({ path, element }) =>
                     <Route path={path} element={element} exact={true}/>
                 )}
-                <Route path="*" element={LOGIN_ROUTE} />
+                <Route path="*" element={<Navigate replace to="/login" /> } />
             </Routes>
         )
 
