@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../routes';
-
+import { CHAT_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 
 
 
@@ -13,7 +13,7 @@ const AppRouter = () => {
                 {privateRoutes.map(({ path, element }) =>
                     <Route path={path} element={element} exact={true}/>
                 )}
-               <Route path="*" element={<Navigate replace to="/chat" /> }/>
+               <Route path="*" element={<Navigate replace to={CHAT_ROUTE} /> }/>
             </Routes>
         )
         :
@@ -22,7 +22,7 @@ const AppRouter = () => {
                 {publicRoutes.map(({ path, element }) =>
                     <Route path={path} element={element} exact={true}/>
                 )}
-                <Route path="*" element={<Navigate replace to="/login" /> } />
+                <Route path="*" element={<Navigate replace to={LOGIN_ROUTE} />} />
             </Routes>
         )
 
