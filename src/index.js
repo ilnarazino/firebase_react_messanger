@@ -18,11 +18,11 @@ const appFire = initializeApp({
 }
 );
 
-const Countext = createContext(null)
+export const Countext = createContext(null)
 
-const auth        = getAuth(appFire);
-const fbDatabase  = getDatabase(appFire);
-const firestore   = getFirestore(appFire);
+const auth = getAuth(appFire);
+export const fbDatabase = getDatabase(appFire);
+const firestore = getFirestore(appFire);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

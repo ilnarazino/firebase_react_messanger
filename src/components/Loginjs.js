@@ -1,14 +1,33 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 import React from "react";
+//import { Countext } from "../index";
+import  firebase  from "firebase";
 
-const Loginjs = () => {
+const Loginjs =  () => {
+    //const {auth} = useContext(Countext)
+
+    const login = async()=>{
+        var provider = new firebase.auth.GoogleAuthProvider();
+        const {user} = await firebase.auth().signInWithPopup(provider);
+        console.log(user)
+    }
     return (
         <Container>
             <Grid container
-                style={{ height: window.innerHeight - 50 }}
+
+                style={{ height: window.innerHeight - 150 }}
                 alignItems={"center"}
-                justify={"center"}>
-                    sdfsfdsdf
+                justifyContent="center"
+            >
+                <Grid style={{ width: 400, background: 'lightgray' }}
+                    container
+                    alignItems={"center"}
+                    direction={"column"}
+                >
+                    <Box p={5}>
+                        <Button onClick={login} variant={"outlined"}>Войти с помощью Google</Button>
+                    </Box>
+                </Grid>
             </Grid>
         </Container>
 
