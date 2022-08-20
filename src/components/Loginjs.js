@@ -28,27 +28,29 @@ const Loginjs = () => {
                 // ...
             });
     }
-    return (
+    return(
         <Container>
-            <Grid container
+        <Grid container
 
-                style={{ height: window.innerHeight - 150 }}
+            style={{ height: window.innerHeight - 150 }}
+            alignItems={"center"}
+            justifyContent="center"
+        >
+           <div class="lds-hourglass"></div>
+            <Grid style = {{width:400,background:'Lightgray'}}
+                container
                 alignItems={"center"}
-                justifyContent="center"
+                direction={"column"}
             >
-                <Grid style={{ width: 400, background: 'lightgray' }}
-                    container
-                    alignItems={"center"}
-                    direction={"column"}
-                >
-                    <Box p={5}>
-                        <Button onClick={login} variant={"outlined"}>Войти с помощью Google</Button>
-                    </Box>
-                </Grid>
+                
+                <Box p={5}>
+                    <Button onClick={login} variant={"outlined"}>Войти с помощью Google</Button>
+                </Box>
             </Grid>
-        </Container>
-
+        </Grid>
+    </Container>
     )
+  
 }
 
 export default Loginjs;
