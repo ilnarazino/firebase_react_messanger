@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
@@ -20,17 +20,19 @@ const appFire = initializeApp({
 
 export const Countext = createContext(null)
 
-const auth = getAuth(appFire);
 export const fbDatabase = getDatabase(appFire);
-const firestore = getFirestore(appFire);
-
+export const auth       = getAuth(appFire);
+export const firestore  = getFirestore(appFire);
+export const provider   = new GoogleAuthProvider();
+provider.setCustomParameters({prompt:'select account'});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Countext.Provider value={{
     fbDatabase,
     auth,
-    firestore
+    firestore,
+    provider
   }}>
     <React.StrictMode>
       <App />

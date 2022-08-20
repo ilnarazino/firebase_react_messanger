@@ -1,15 +1,32 @@
 import { Box, Button, Container, Grid } from "@mui/material";
-import React from "react";
-//import { Countext } from "../index";
-import  firebase  from "firebase";
+import React, {useContext} from "react";
+import { Countext } from "../index";
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-const Loginjs =  () => {
-    //const {auth} = useContext(Countext)
+const Loginjs = () => {
+    const {auth,provider} = useContext(Countext)
 
-    const login = async()=>{
-        var provider = new firebase.auth.GoogleAuthProvider();
-        const {user} = await firebase.auth().signInWithPopup(provider);
-        console.log(user)
+    const login = async () => {
+        provider.setCustomParameters({ prompt: 'select_account' });
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // redux action? --> dispatch({ type: SET_USER, user });
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
     }
     return (
         <Container>
