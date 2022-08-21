@@ -3,7 +3,7 @@ import { Avatar, Button, Container, Grid, TextField } from "@mui/material";
 import React, { useContext, useState } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Countext } from "../index";
-import { collection, addDoc, getDocs, serverTimestamp } from "firebase/firestore";
+import { collection,query, addDoc, getDocs, serverTimestamp, orderBy } from "firebase/firestore";
 
 
 const Chatjs = () => {
@@ -13,11 +13,12 @@ const Chatjs = () => {
     const [messages, sendMessag] = useState([]);
 
     const readMessage = async () => {
-        const querySnapshot = await getDocs(collection(firestore, "messages"));
+        const scoreBoardRef = query(collection(firestore, "messages"),orderBy('createdAt'));
+        const querySnapshot = await getDocs(scoreBoardRef);
         let message1 = [];
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
+            //console.log(doc.id, " => ", doc.data());
             message1.push(doc.data());
         });
         sendMessag(message1);
